@@ -5,11 +5,15 @@
                 <a href="#" class="text-blue-600 hover:underline">Download {{ env('APP_NAME') }} App</a>
             </div>
             <div class="space-x-4 md:flex">
-                <a href="{{ route('page',['pagename'=>'tentang-aplikasi']) }}" class="hover:text-green-600">Tentang {{ env('APP_NAME') }}</a>
-                <a href="{{ route('page',['pagename'=>'mitra']) }}" class="hover:text-green-600">Mitra {{ env('APP_NAME') }}</a>
-                <a href="{{ route('page',['pagename'=>'edukasi-seller']) }}" class="hover:text-green-600">Pusat Edukasi Seller</a>
-                <a href="{{ route('page',['pagename'=>'promo']) }}" class="hover:text-green-600">Promo</a>
-                <a href="{{ route('page',['pagename'=>'care']) }}" class="hover:text-green-600">{{ env('APP_NAME') }} Care</a>
+                <a href="{{ route('page', ['pagename' => 'tentang-aplikasi']) }}" class="hover:text-green-600">Tentang
+                    {{ env('APP_NAME') }}</a>
+                <a href="{{ route('page', ['pagename' => 'mitra']) }}" class="hover:text-green-600">Mitra
+                    {{ env('APP_NAME') }}</a>
+                <a href="{{ route('page', ['pagename' => 'edukasi-seller']) }}" class="hover:text-green-600">Pusat Edukasi
+                    Seller</a>
+                <a href="{{ route('page', ['pagename' => 'promo']) }}" class="hover:text-green-600">Promo</a>
+                <a href="{{ route('page', ['pagename' => 'care']) }}" class="hover:text-green-600">{{ env('APP_NAME') }}
+                    Care</a>
             </div>
         </div>
     </header>
@@ -57,16 +61,16 @@
                     </g>
                 </svg>
                 @if (Auth::check())
-                                @php
-                                    $cartcount = \App\Models\Cart::where([
-                                        'buyer_id' => Auth::user()->id,
-                                        'ispay' => 0,
-                                    ])->count();
-                                @endphp
-                                @if ($cartcount > 0)
-                                    <span
-                                        class="absolute px-1 text-xs text-white bg-red-600 rounded-full -top-1 -right-2">{{ $cartcount }}</span>
-                                @endif
+                    @php
+                        $cartcount = \App\Models\Cart::where([
+                            'buyer_id' => Auth::user()->id,
+                            'ispay' => 0,
+                        ])->count();
+                    @endphp
+                    @if ($cartcount > 0)
+                        <span
+                            class="absolute px-1 text-xs text-white bg-red-600 rounded-full -top-1 -right-2">{{ $cartcount }}</span>
+                    @endif
                 @endif
             </a>
             @if (Auth::check())
@@ -92,15 +96,22 @@
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profil</a>
                             </li>
                             <li>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Keluar</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Keluar
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                    @csrf
+                                </form>
                             </li>
                         </ul>
                     </div>
                 </div>
                 @if (Auth::user()->seller)
-                <a href="{{ route('filament.seller.auth.profile') }}" class="relative">
-                    {{ Str::limit(Auth::user()->seller->name, '10', '...') }}
-                </a>
+                    <a href="{{ route('filament.seller.auth.profile') }}" class="relative">
+                        {{ Str::limit(Auth::user()->seller->name, '10', '...') }}
+                    </a>
                 @endif
             @endif
         </div>
