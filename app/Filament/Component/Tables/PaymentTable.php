@@ -17,7 +17,7 @@ class PaymentTable
             TextColumn::make('payment_status')
                 ->badge()
                 ->color(fn(string $state): string => match ($state) {
-                    'completed' => 'gray', 'pending' => 'gray', 'success' => 'success', 'failed' => 'danger'
+                    'completed' => 'info', 'pending' => 'gray', 'success' => 'success', 'failed' => 'danger'
                 }),
             TextColumn::make('payment_date')
                 ->dateTime()
